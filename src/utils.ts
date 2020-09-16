@@ -3,7 +3,7 @@ import { Contract } from '@ethersproject/contracts';
 import { jsonToGraphQLQuery } from 'json-to-graphql-query';
 import { abi as multicallAbi } from './abi/Multicall.json';
 
-const MULTICALL = '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441';
+const MULTICALL = '0x2fd94457b707b2776d4f4e4292a4280164fe8a15';
 
 export async function multicall(provider, abi, calls, options?) {
   const multi = new Contract(MULTICALL, multicallAbi, provider);
