@@ -1,16 +1,43 @@
 import { formatUnits } from '@ethersproject/units';
 import { multicall } from '../../utils';
-import { abi } from './DSChief.json';
 
-const MAKER_DS_CHIEF_ADDRESS = '0x9eF05f7F6deB616fd37aC3c959a2dDD25A54E4F5';
+export const author = 'bonustrack';
+export const version = '0.1.0';
 
-export async function strategy(provider, addresses, options, snapshot) {
+const MAKER_DS_CHIEF_ADDRESS = {
+  1: '0x9ef05f7f6deb616fd37ac3c959a2ddd25a54e4f5'
+}
+
+const abi = [
+  {
+    constant: true,
+    inputs: [
+      {
+        name: '',
+        type: 'address'
+      }
+    ],
+    name: 'deposits',
+    outputs: [
+      {
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  }
+];
+
+export async function strategy(network, provider, addresses, options, snapshot) {
   const blockTag = typeof snapshot === 'number' ? snapshot : 'latest';
   const response = await multicall(
+    network,
     provider,
     abi,
     addresses.map((address: any) => [
-      MAKER_DS_CHIEF_ADDRESS,
+      MAKER_DS_CHIEF_ADDRESS[network],
       'deposits',
       [address]
     ]),

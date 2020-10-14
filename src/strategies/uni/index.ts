@@ -4,6 +4,10 @@ import { multicall } from '../../utils';
 export const author = 'bonustrack';
 export const version = '0.1.0';
 
+const UNI_ADDRESS = {
+  1: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984'
+}
+
 const abi = [
   {
     constant: true,
@@ -14,12 +18,12 @@ const abi = [
         type: 'address'
       }
     ],
-    name: 'balanceOf',
+    name: 'getCurrentVotes',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'uint96',
         name: '',
-        type: 'uint256'
+        type: 'uint96'
       }
     ],
     payable: false,
@@ -34,8 +38,12 @@ export async function strategy(network, provider, addresses, options, snapshot) 
     network,
     provider,
     abi,
-    addresses.map((address: any) => [options.address, 'balanceOf', [address]]),
-    { blockTag }
+    addresses.map((address: any) => [
+      UNI_ADDRESS[network],
+      'getCurrentVotes',
+      [address.toLowerCase()],
+      { blockTag }
+    ])
   );
   return Object.fromEntries(
     response.map((value, i) => [
