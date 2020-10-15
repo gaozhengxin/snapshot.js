@@ -2,15 +2,17 @@ import { formatUnits } from '@ethersproject/units';
 import { multicall } from '../../utils';
 import { abi } from './TestToken.json';
 
-export async function strategy(provider, addresses, options, snapshot) {
+export async function strategy(network, provider, addresses, options, snapshot) {
   const blockTag = typeof snapshot === 'number' ? snapshot : 'latest';
   const response = await multicall(
+    network,
     provider,
     abi,
     addresses.map((address: any) => [options.address, 'balanceOf', [address]]),
     { blockTag }
   );
   const response2 = await multicall(
+    network,
     provider,
     abi,
     addresses.map((address: any) => [options.liquidity_address, 'balanceOf', [address]]),
@@ -18,6 +20,7 @@ export async function strategy(provider, addresses, options, snapshot) {
   );
   
   const response3 = await multicall(
+    network,
     provider,
     abi,
     [[options.liquidity_address, 'totalSupply', []]],
@@ -25,6 +28,7 @@ export async function strategy(provider, addresses, options, snapshot) {
   );
   let totalLiq = parseFloat(formatUnits(response3.toString(), options.liquidity_decimals));
   const response4 = await multicall(
+    network,
     provider,
     abi,
     [[options.address, 'balanceOf', [options.liquidity_address]]],
