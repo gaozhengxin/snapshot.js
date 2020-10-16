@@ -5,14 +5,14 @@ import { strategy as erc20BalanceOfFixedTotal } from './erc20-balance-of-fixed-t
 import { strategy as erc20BalanceOfCv } from './erc20-balance-of-cv';
 import { strategy as ethBalance } from './eth-balance';
 import { strategy as makerDsChief } from './maker-ds-chief';
-import { strategy as erc20BalanceAndLiqudityOf } from './erc20-balance-and-liqudity-of';
+import { strategy as balanceAndLiquidity } from './balance-and-liquidity';
 
 import { strategy as uni } from './uni';
 import { strategy as yearnVault } from './yearn-vault';
 import { strategy as moloch } from './moloch';
 
 export default {
-  erc20BalanceAndLiqudityOf,
+  balanceAndLiquidity,
   balancer,
   'contract-call': contractCall,
   'erc20-balance-of': erc20BalanceOf,
