@@ -4,6 +4,7 @@ import { jsonToGraphQLQuery } from 'json-to-graphql-query';
 import { abi as multicallAbi } from './abi/Multicall.json';
 import _strategies from './strategies';
 
+
 export const MULTICALL = {
   1: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
   4: '0x42ad527de7d4e9d9d011ac45b31d8551f8fe9821',
@@ -11,8 +12,9 @@ export const MULTICALL = {
   6: '0x53c43764255c17bd724f74c4ef150724ac50a3ed',
   42: '0x2cc8688c5f75e365aaeeb4ea8d6a480405a48d2a',
   56: '0x1ee38d535d541c55c9dae27b12edf090c608e6fb',
-  100: '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a'
-};
+  100: '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a',
+  32659:'0x25afd2058b6e5e00995467d58778a2790a0e5038',
+}
 
 export async function multicall(network, provider, abi, calls, options?) {
   const multi = new Contract(MULTICALL[network], multicallAbi, provider);
